@@ -363,7 +363,7 @@ class ProtocolGraphWalker(object):
         if not heads:
             # The repo is empty, so short-circuit the whole process.
             self.proto.write_pkt_line(None)
-            return []
+            return None
         values = set(heads.itervalues())
         if self.advertise_refs or not self.http_req:
             for i, (ref, sha) in enumerate(sorted(heads.iteritems())):
@@ -406,7 +406,7 @@ class ProtocolGraphWalker(object):
             # The client may close the socket at this point, expecting a
             # flush-pkt from the server. We might be ready to send a packfile at
             # this point, so we need to explicitly short-circuit in this case.
-            return []
+            return None
 
         return want_revs
 
